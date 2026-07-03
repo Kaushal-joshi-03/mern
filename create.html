@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Poppins', sans-serif;
+}
+
+body{
+height:100vh;
+min-height: 100vh;
+display:flex;
+justify-content: center;
+align-items: center;
+background:#f3f4f6;
+padding: 40px; 
+overflow:hidden;
+}
+
+
+.main-wrapper {
+display: flex;
+width: 100%;
+max-width: 1200px;
+height: 100%;
+background: #ffffff;
+border-radius: 28px;
+box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+overflow: hidden;
+position: relative;
+animation: appSpawn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
+.left-panel{
+flex:1.2;
+position: relative;
+overflow:hidden;
+display: flex;
+align-items: flex-end;
+padding: 60px;
+}
+
+.left-panel img{
+position: absolute;
+top: 0;
+left: 0;
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+z-index: 1;
+}
+
+
+.left-panel-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(135deg, rgba(15, 12, 30, 0.82) 0%, rgba(37, 40, 84, 0.88) 100%);
+z-index: 2;
+}
+
+
+.left-panel-content {
+position: relative;
+z-index: 3;
+color: #ffffff;
+max-width: 460px;
+animation: textFadeIn 0.8s ease-out forwards;
+}
+
+.left-panel-content h1 {
+font-size: 3.2rem;
+font-weight: 700;
+line-height: 1.15;
+margin-bottom: 12px;
+text-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.left-panel-content h3 {
+font-size: 1.35rem;
+font-weight: 400;
+margin-bottom: 24px;
+opacity: 0.95;
+text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+.form-container{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#ffffff;
+padding:50px 60px;
+overflow-y: auto;
+z-index: 4;
+}
+
+form{
+width:100%;
+max-width:420px;
+padding:0;
+background: transparent;
+border-radius: 0;
+box-shadow: none;
+animation: formSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+h2{
+text-align: left;
+margin-bottom: 6px;
+color: #111827;
+font-size: 32px;
+font-weight: 700;
+letter-spacing: -0.5px;
+}
+
+.form-subtitle {
+font-size: 14px;
+color: #6b7280;
+margin-bottom: 30px;
+}
+
+
+.name-row {
+display: flex;
+gap: 20px; 
+width: 100%;
+}
+
+.name-row .input-group {
+flex: 1;
+}
+
+.input-group {
+position: relative;
+margin-bottom: 20px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+font-size: 13px;
+color: #374151;
+letter-spacing: 0.2px;
+}
+
+
+.input-wrapper {
+position: relative;
+display: flex;
+align-items: center;
+width: 100%;
+}
+
+.input-wrapper i.field-icon {
+position: absolute;
+left: 16px;
+color: #9ca3af;
+font-size: 16px;
+transition: color 0.3s ease;
+pointer-events: none;
+}
+
+input{
+width:100%;
+padding: 14px 16px 14px 48px;
+margin-bottom: 0;
+border:1.5px solid #e5e7eb;
+border-radius: 12px;
+font-size:14px;
+color: #111827;
+outline:none;
+background: #f9fafb;
+transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input::placeholder {
+color: #9ca3af;
+}
+
+input:focus{
+border-color:#6a11cb;
+background: #ffffff;
+box-shadow: 0 0 0 4px rgba(106, 17, 203, 0.12);
+}
+
+input:focus + i.field-icon {
+color: #6a11cb;
+}
+
+/* Password visibility toggle styles */
+.input-wrapper input[type="password"],
+.input-wrapper input[type="text"].pw-active {
+padding-right: 48px;
+}
+
+.toggle-password {
+position: absolute;
+right: 16px;
+color: #9ca3af;
+cursor: pointer;
+transition: color 0.2s ease;
+user-select: none;
+padding: 4px;
+}
+
+.toggle-password:hover {
+color: #111827;
+}
+
+.checkbox{
+display:flex;
+align-items: flex-start;
+gap:12px;
+margin-top: 24px;
+margin-bottom: 28px;
+}
+
+.checkbox input{
+width:19px;
+height:19px;
+margin:0;
+accent-color: #6a11cb;
+cursor:pointer;
+border-radius: 6px;
+flex-shrink: 0;
+}
+
+.checkbox label{
+margin:0;
+font-size:13.5px;
+font-weight:400;
+color: #4b5563;
+cursor:pointer;
+line-height: 1.4;
+}
+
+.btn{
+width:100%;
+padding:15px;
+background:linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+border:none;
+border-radius: 12px;
+color:white;
+font-size:16px;
+font-weight: 600;
+cursor:pointer;
+box-shadow: 0 4px 14px rgba(106, 17, 203, 0.25);
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:hover{
+transform:translateY(-2px);
+box-shadow: 0 8px 22px rgba(106, 17, 203, 0.38);
+opacity: 0.95;
+}
+
+.btn:active {
+transform: translateY(0);
+}
+
+
+.divider {
+display: flex;
+align-items: center;
+text-align: center;
+margin: 26px 0;
+color: #9ca3af;
+font-size: 12px;
+font-weight: 500;
+text-transform: uppercase;
+letter-spacing: 0.8px;
+}
+
+.divider::before, .divider::after {
+content: '';
+flex: 1;
+border-bottom: 1px solid #e5e7eb;
+}
+
+.divider:not(:empty)::before { margin-right: 1em; }
+.divider:not(:empty)::after { margin-left: 1em; }
+
+.social-buttons{
+display:flex;
+gap:14px;
+margin-top: 0;
+margin-bottom: 26px;
+}
+
+
+.social-buttons button{
+flex:1;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+padding:13px;
+border:1.5px solid #e5e7eb;
+background:#ffffff;
+border-radius: 12px;
+cursor:pointer;
+font-size:14px;
+font-weight: 500;
+color: #374151;
+transition: all 0.25s ease;
+}
+
+.social-buttons button svg {
+width: 18px;
+height: 18px;
+display: block;
+}
+
+.social-buttons button:hover{
+background:#f9fafb;
+border-color: #d1d5db;
+transform:translateY(-2px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.signin-footer {
+text-align: center;
+font-size: 14px;
+color: #6b7280;
+margin-top: 4px;
+}
+
+.signin-footer a {
+color: #6a11cb;
+text-decoration: none;
+font-weight: 600;
+transition: color 0.2s;
+}
+
+.signin-footer a:hover {
+text-decoration: underline;
+color: #2575fc;
+}
+
+
+@keyframes appSpawn {
+from { opacity: 0; transform: scale(0.97); }
+to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes textFadeIn {
+from { opacity: 0; transform: translateY(15px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes formSlideUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+
+@media(max-width: 1024px) {
+.left-panel-content h1 {
+font-size: 2.6rem;
+}
+.form-container {
+padding: 40px;
+}
+}
+
+
+@media(max-width: 768px) {
+.name-row {
+flex-direction: column; 
+gap: 0; 
+}
+}
+
+@media(max-width:900px){
+body{
+flex-direction:column;
+height:auto;
+overflow: auto;
+padding: 20px;
+}
+
+.main-wrapper {
+flex-direction: column;
+height: auto;
+border-radius: 20px;
+}
+
+.left-panel{
+height:320px;
+flex: none;
+padding: 40px 30px;
+}
+
+.left-panel-content p {
+display: none;
+}
+
+.form-container{
+padding:45px 30px;
+flex: none;
+}
+
+form {
+max-width: 100%;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="main-wrapper">
+
+    <div class="left-panel">
+        <img src="scene.png" alt="Signup Illustration">
+        <div class="left-panel-overlay"></div>
+        
+        <div class="left-panel-content">
+            <h1>Welcome!</h1>
+            <h3>Create your account for free.</h3>
+        </div>
+    </div>
+
+    <div class="form-container">
+
+        <form action="#" method="post">
+            <h2>Create an Account</h2>
+            <p class="form-subtitle">Get started today with your new premium profile account.</p>
+
+            <div class="name-row">
+                <div class="input-group">
+                    <label for="fname">First Name</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-user field-icon"></i>
+                        <input type="text" id="fname" name="fname" placeholder="Enter your first name" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="lname">Last Name</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-user field-icon"></i>
+                        <input type="text" id="lname" name="lname" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-envelope field-icon"></i>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <i class="fa-regular fa-eye toggle-password" id="passToggleElement"></i>
+                </div>
+            </div>
+
+            <div class="checkbox">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">I agree to the updated Terms & Conditions and explicit privacy mandates.</label>
+            </div>
+
+            <button type="submit" class="btn">Create Account</button>
+
+            <div class="divider">or</div>
+
+            <div class="social-buttons">
+                <button type="button">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                    </svg>
+                    Google
+                </button>
+                <button type="button">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.57 2.95-1.39z" fill="#000000"/>
+                    </svg>
+                    Apple
+                </button>
+            </div>
+
+            <div class="signin-footer">
+                Already have an account? <a href="#">Sign In</a>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+   
+    const passwordInputField = document.getElementById('password');
+    const toggleIconIndicator = document.getElementById('passToggleElement');
+
+    toggleIconIndicator.addEventListener('click', function () {
+        const dynamicAttributeValue = passwordInputField.getAttribute('type');
+        
+        if (dynamicAttributeValue === 'password') {
+            passwordInputField.setAttribute('type', 'text');
+            passwordInputField.classList.add('pw-active');
+            this.classList.remove('fa-eye');
+            this.classList.add('fa-eye-slash');
+        } else {
+            passwordInputField.setAttribute('type', 'password');
+            passwordInputField.classList.remove('pw-active');
+            this.classList.remove('fa-eye-slash');
+            this.classList.add('fa-eye');
+        }
+    });
+</script>
+
+</body>
+</html>
